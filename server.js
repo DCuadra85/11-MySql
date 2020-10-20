@@ -64,19 +64,29 @@ function start() {
                     break;
 
             }
-        });
+        })
+        .catch((err) => {
+            if (err) {
+                console.log("Error:", err)
+            }
+        })
 }
 
 function viewEmployeeAll() {
-    console.log ("View Employees")
+    console.log("View Employees")
+    connection.query("SELECT * FROM employee", function(err, res) {
+        if (err) throw err;
+        console.table(res)
+    })
+
 }
 
 function viewEmployeeDepartment() {
-    console.log ("View Employee Dept.")
+    console.log("View Employee Dept.")
 }
 
 function viewEmployeeManager() {
-    console.log ("View Employee Manager")
+    console.log("View Employee Manager")
 }
 
 function addEmployee() {
@@ -88,13 +98,13 @@ function removeEmployee() {
 }
 
 function updateEmployeeRole() {
-    console.log ("update employee role")
+    console.log("update employee role")
 }
 
-function updateEmployeeManager () {
-    console.log ("update employee manager")
+function updateEmployeeManager() {
+    console.log("update employee manager")
 }
 
 function viewRoles() {
-    console.log ("View Roles")
+    console.log("View Roles")
 }
