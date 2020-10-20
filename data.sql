@@ -27,7 +27,7 @@ CREATE TABLE employee(
   PRIMARY KEY (id)
 );
 
-INSERT INTO deparment (name)
+INSERT INTO department (name)
 VALUES ("Administration"), ("Intelligence"), ("Operations"), ("Communications");
 
 INSERT INTO role (title, salary, department_id)
