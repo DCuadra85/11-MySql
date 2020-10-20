@@ -36,7 +36,11 @@ VALUES ("Reception", 40000, 1), ("Manager", 60000, 1), ("Administrator", 50000, 
 ("Targeting", 40000, 3), ("Operator", 50000, 3), ("Stategist", 60000, 3),
 ("Communications Officer", 40000, 4), ("Communication Security", 50000, 4), ("ComSec Custodian", 60000, 4);
 
+SELECT * FROM department;
 
+SELECT * FROM role;
+
+SELECT * FROM employee;
 --exampleguidetoreview, needtoadjustforuse
 SELECT top_albums.year, top_albums.album, top_albums.position, top5000.song, top5000.artist 
 FROM top_albums 
@@ -46,4 +50,3 @@ WHERE (top_albums.artist = ? AND top5000.artist = ?)
 ORDER BY top_albums.year, top_albums.position;
 
 
-SELECT * FROM department;
