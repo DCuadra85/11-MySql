@@ -48,21 +48,53 @@ function start() {
                     viewEmployeeManager();
                     break;
                 case "Add Employee":
-                    songSearch();
+                    addEmployee();
                     break;
                 case "Remove Employee":
-                    songAndAlbumSearch();
+                    removeEmployee();
                     break;
                 case "Update Employee Role":
-                    songAndAlbumSearch();
+                    updateEmployeeRole();
                     break;
                 case "Update Employee Manager":
-                    songAndAlbumSearch();
+                    updateEmployeeManager();
                     break;
                 case "View All Roles":
-                    songAndAlbumSearch();
+                    viewRoles();
                     break;
 
             }
         });
+}
+
+function viewEmployeeAll() {
+    console.log ("View Employees")
+}
+
+function viewEmployeeDepartment() {
+    console.log ("View Employee Dept.")
+}
+
+function viewEmployeeManager() {
+    console.log ("View Employee Manager")
+}
+
+function addEmployee() {
+    console.log("add employee")
+}
+
+function removeEmployee() {
+    console.log("remove employee")
+}
+
+function updateEmployeeRole() {
+    console.log ("update employee role")
+}
+
+function updateEmployeeManager () {
+    console.log ("update employee manager")
+}
+
+function viewRoles() {
+    console.log ("View Roles")
 }
