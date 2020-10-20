@@ -36,4 +36,33 @@ function start() {
                 "View All Roles",
             ]
         })
+        .then(function (answer) {
+            switch (answer.action) {
+                case "View All Employees":
+                    viewEmployeeAll();
+                    break;
+                case "View All Employees by Department":
+                    viewEmployeeDepartment();
+                    break;
+                case "View All Employes by Manager":
+                    viewEmployeeManager();
+                    break;
+                case "Add Employee":
+                    songSearch();
+                    break;
+                case "Remove Employee":
+                    songAndAlbumSearch();
+                    break;
+                case "Update Employee Role":
+                    songAndAlbumSearch();
+                    break;
+                case "Update Employee Manager":
+                    songAndAlbumSearch();
+                    break;
+                case "View All Roles":
+                    songAndAlbumSearch();
+                    break;
+
+            }
+        });
 }
