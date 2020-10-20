@@ -14,10 +14,14 @@ var connection = mysql.createConnection({
     database: "employeetrackerdb"
 });
 
+//Start connection to DB
+
 connection.connect(function (err) {
     if (err) throw err;
     start();
 });
+
+//Main Selection List
 
 function start() {
     inquirer
@@ -72,6 +76,8 @@ function start() {
         })
 }
 
+// View All Employees
+
 function viewEmployeeAll() {
     console.log("View Employees")
     connection.query("SELECT * FROM employee", function(err, res) {
@@ -82,6 +88,13 @@ function viewEmployeeAll() {
 }
 
 function viewEmployeeDepartment() {
+    const viewEmployeeDepartment = function() {
+        const departmentArr = [];
+        connection.query("Select name From Department", function(err, res) {
+            if (err) throw err;
+
+        })
+    }
     console.log("View Employee Dept.")
 }
 
@@ -90,6 +103,21 @@ function viewEmployeeManager() {
 }
 
 function addEmployee() {
+    inquirer
+        .prompt([{
+            name: "newemployee",
+            type: "input",
+            message: "What is the name of the employee?",
+            when: 
+                not a manager, then select manager from choice prompt
+        },
+        {
+        }]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
+
+    connection.query("Select name From Department", function(err, res) {
+        if (err) throw err;
+
+    })
     console.log("add employee")
 }
 
