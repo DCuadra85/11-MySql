@@ -80,7 +80,7 @@ function start() {
 
 function viewEmployeeAll() {
     console.log("View Employees")
-    connection.query("SELECT * FROM employee", function(err, res) {
+    connection.query("SELECT * FROM employee", function (err, res) {
         if (err) throw err;
         console.table(res)
     })
@@ -88,33 +88,35 @@ function viewEmployeeAll() {
 }
 
 function viewEmployeeDepartment() {
-    const viewEmployeeDepartment = function() {
-        const departmentArr = [];
-        connection.query("Select name From Department", function(err, res) {
-            if (err) throw err;
+    console.log("View Employee Dept.")
+    // const viewEmployeeDepartment = function() {
+    //     const departmentArr = [];
+    connection.query("Select name From Department", function (err, res) {
+        if (err) throw err;
+        res.forEach(function (list) {
 
         })
-    }
-    console.log("View Employee Dept.")
+    })
 }
+
 
 function viewEmployeeManager() {
     console.log("View Employee Manager")
 }
 
 function addEmployee() {
-    inquirer
-        .prompt([{
-            name: "newemployee",
-            type: "input",
-            message: "What is the name of the employee?",
-            when: 
-                not a manager, then select manager from choice prompt
-        },
-        {
-        }]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
+    // inquirer
+    //     .prompt([{
+    //         name: "newemployee",
+    //         type: "input",
+    //         message: "What is the name of the employee?",
+    //         when: 
+    //             not a manager, then select manager from choice prompt
+    //     },
+    //     {
+    //     }]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
 
-    connection.query("Select name From Department", function(err, res) {
+    connection.query("Select name From Department", function (err, res) {
         if (err) throw err;
 
     })
@@ -135,4 +137,9 @@ function updateEmployeeManager() {
 
 function viewRoles() {
     console.log("View Roles")
+    connection.query("SELECT * FROM role", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        start();
+    })
 }
