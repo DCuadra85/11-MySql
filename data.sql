@@ -23,6 +23,8 @@ CREATE TABLE employee(
   last_name VARCHAR(30) NOT NULL,
   role_id INTEGER,
   manager_id INTEGER NULL,
+  FOREIGN KEY manager_id REFERENCES ,
+  FOREIGN KEY role_id REFERENCES ,
   PRIMARY KEY (id)
 );
 
@@ -32,11 +34,10 @@ VALUES ("Administration"), ("Intelligence"), ("Operations"), ("Communications");
 INSERT INTO role (title, salary, department_id)
 VALUES ("Reception", 40000, 1), ("Manager", 60000, 1), ("Administrator", 50000, 1), 
 ("Intelligence Analyst", 40000, 2), ("Counter Intelligence", 50000, 2), ("GeoSpatial Intelligence", 40000, 2),
-("Targeting", 40000, 3), ("Operator", 50000, 3), ("Stategist", 60000, 3),
-("Communications Officer", 40000, 4), ("Communication Security", 50000, 4), ("ComSec Custodian", 60000, 4);
+("Targeting", 40000, 3), ("Operator", 50000, 3), ("Stategist", 60000, 3);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Paul", "Mills", 1, 0), ("John", "Doe", 2 , 0), ("James", "Bond", 3, 0);
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Paul", "Mills", 1), ("John", "Doe", 2), ("James", "Bond", 3);
 
 SELECT * FROM department;
 

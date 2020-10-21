@@ -49,7 +49,7 @@ function start() {
                     viewEmployeeDepartment();
                     break;
                 case "View All Employes by Manager":
-                    viewEmployeeManager();
+                    viewEmployeeRole();
                     break;
                 case "Add Employee":
                     addEmployee();
@@ -84,8 +84,10 @@ function viewEmployeeAll() {
         if (err) throw err;
         console.table(res)
     })
-
+    start();
 }
+
+
 
 function viewEmployeeDepartment() {
     console.log("View Employee Dept.")
@@ -103,10 +105,10 @@ function viewEmployeeDepartment() {
                 message: "Which department do you want to view?",
                 choices: departmentArr,
             }
-        ).then(function(answer) {
+        ).then(function (answer) {
             let selectDept = "SELECT first_name, last_name FROM employee INNER JOIN role ON (employee.role_id = role.id) INNER JOIN department ON (role.department_id = department.id) WHERE (department.name = ? AND employee.role_id = role.id AND role.department_id = department.id)";
 
-            connection.query(selectDept, [answer.department], function(err, res) {
+            connection.query(selectDept, [answer.department], function (err, res) {
                 if (err) throw err;
                 console.table(res);
                 start();
@@ -116,47 +118,63 @@ function viewEmployeeDepartment() {
 }
 
 
-function viewEmployeeManager() {
-    console.log("View Employee Manager")
+function viewEmployeeRole() {
+
+    console.log("View Employee Role")
 }
 
-function addEmployee() {
-    // inquirer
-    //     .prompt([
-    //         {
-    //             name: "firstName",
-    //             type: "input",
-    //             message: "What is the first name of the employee?",
-    //         },
-    //         {
-    //             name: "lastName",
-    //             type: "input",
-    //             message: "What is the last name of the employee?",
-    //         },
-    //         {
-    //             name: "selectRole"
-    //             type: "list",
-    //             message: "What is the employee role?",
-    //             choices: //[make an array]
-    //         },
-    //         {
-    //             name: "managerSelect",
-    //             type: "list",
-    //             message: "Who is the employee's manager?"
-    //             // choices: "Array"
-    //         },
-    //         // when: 
-    //         //     not a manager, then select manager from choice prompt
+// function addEmployee() {
+//     const roleList = [];
+//     const managerList = ["No management"];
 
+//     connection.query("SELECT title FROM role", function (err, res) {
+//         if (err) throw err;
+//         res.forEach(function (element) {
+//             roleList.push(element.title);
+//         });
+//     });
 
-    //     ]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
+//     connection.query("SELECT first_name, last_name FROM employees WHERE (employees.manager_id = 0)", function (err, res) {
+//         if (err) throw err;
+//         res.forEach(function (element) {
+//             const managerString = element.first_name + " " + element.last_name;
+//             managerList.push(managerString); 0
+//         });
+//     });
 
-    //         connection.query("Select name From Department", function (err, res) {
-    //             if (err) throw err;
+//     inquirer
+//         .prompt([
+//             {
+//                 name: "firstName",
+//                 type: "input",
+//                 message: "What is the first name of the employee?",
+//             },
+//             {
+//                 name: "lastName",
+//                 type: "input",
+//                 message: "What is the last name of the employee?",
+//             },
+//             {
+//                 name: "selectRole",
+//                 type: "list",
+//                 message: "What is the employee role?",
+//                 choices: roleList,
+//             },
+//             {
+//                 name: "managerSelect",
+//                 type: "list",
+//                 message: "Who is the employee's manager?",
+//                 choices: managerList,
+//             },
 
-    //         })
-    // console.log("add employee")
-}
+//         ]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
+
+//             connection.query("Select name From Department", function (err, res) {
+//                 if (err) throw err;
+
+//             })
+//     console.log("add employee")
+// }
 
 function removeEmployee() {
     console.log("remove employee")
