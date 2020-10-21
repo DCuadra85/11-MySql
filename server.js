@@ -216,6 +216,9 @@ function addEmployeeRole() {
         if (err) throw err;
     })
 
+    const deptName = res.map((dept) => dept.deptName);
+    const deptList = res;
+
     inquirer.prompt([
         {
             type: "input",
@@ -231,9 +234,22 @@ function addEmployeeRole() {
             type: "input",
             name: "roleDepartment",
             message: "Choose a department.",
-            choices:
-        }
+            choices: deptName,
+        },
     ])
+    .then(function(answer) {
+        const dept = deptList.find(
+            (department) => department.deptName === answer.roleDepartment
+        );
+        connection.query("INSERT INTO role SET ?", [
+            {
+                title: answer.roleTitle,
+                salary: answer.salary,
+                dept_id: answer.id,
+            }
+        ]);
+        start();
+    })
 }
 
 function updateEmployeeRole() {
@@ -280,6 +296,7 @@ function updateEmployeeRole() {
 
 function updateEmployeeManager() {
     console.log("update employee manager")
+    start();
 }
 
 function viewRoles() {
