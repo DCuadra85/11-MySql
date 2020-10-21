@@ -187,6 +187,16 @@ function addEmployee() {
 
 function addEmployeeDepartment() {
     console.log("Add Department")
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "deptName",
+            message: "What is the new department?"
+        },
+    ]).then(function(res) {
+        connection.query("INSERT INTO department SET ?", [{department: res.deptName}]);
+        start();
+    })
 }
 
 function addEmployeeRole(){
