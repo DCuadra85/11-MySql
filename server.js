@@ -178,11 +178,22 @@ function addEmployee() {
                     }
                 }
             }
+            const roleID = findRoleID();
         });
 
+    connection.query("INSERT INTO employee SET ?",
+        {
+            first_name: answer.firstName,
+            last_name: answer.lastName,
+            role_id: roleID,
+        },
+        function (err) {
+            if (err) throw err;
+            console.log("Employee Added");
+            start();
+        })
 
-
-    console.log("add employee")
+    // console.log("add employee")
 }
 
 function addEmployeeDepartment() {
@@ -193,14 +204,36 @@ function addEmployeeDepartment() {
             name: "deptName",
             message: "What is the new department?"
         },
-    ]).then(function(res) {
-        connection.query("INSERT INTO department SET ?", [{department: res.deptName}]);
+    ]).then(function (res) {
+        connection.query("INSERT INTO department SET ?", [{ department: res.deptName }]);
         start();
     })
 }
 
-function addEmployeeRole(){
+function addEmployeeRole() {
     console.log("Add Role")
+    connection.query("SELECT * FROM department", function (err, res) {
+        if (err) throw err;
+    })
+
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "roleTitle",
+            message: "What is the new role?"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "What is the role salary?",
+        },
+        {
+            type: "input",
+            name: "roleDepartment",
+            message: "Choose a department.",
+            choices:
+        }
+    ])
 }
 
 function updateEmployeeRole() {
