@@ -34,9 +34,9 @@ function start() {
                 "View All Employees by Department",
                 "View All Employees by Role",
                 "Add Employee",
-                "Remove Employee",
+                "Add Department",
+                "Add Role",
                 "Update Employee Role",
-                "Update Employee Manager",
                 "View All Roles",
             ]
         })
@@ -48,20 +48,20 @@ function start() {
                 case "View All Employees by Department":
                     viewEmployeeDepartment();
                     break;
-                case "View All Employes by Manager":
+                case "View All Employees by Role":
                     viewEmployeeRole();
                     break;
                 case "Add Employee":
                     addEmployee();
                     break;
-                case "Remove Employee":
-                    removeEmployee();
+                case "Add Department":
+                    addEmployeeDepartment();
+                    break;
+                case "Add Role":
+                    addEmployeeRole();
                     break;
                 case "Update Employee Role":
                     updateEmployeeRole();
-                    break;
-                case "Update Employee Manager":
-                    updateEmployeeManager();
                     break;
                 case "View All Roles":
                     viewRoles();
@@ -120,8 +120,8 @@ function viewEmployeeRole() {
         if (err) throw err;
         console.table(res)
     })
-    start();
     console.log("View Employee Role")
+    start();
 }
 
 //add functions
@@ -180,13 +180,17 @@ function addEmployee() {
             }
         });
 
-    
+
 
     console.log("add employee")
 }
 
-function removeEmployee() {
-    console.log("remove employee")
+function addEmployeeDepartment() {
+    console.log("Add Department")
+}
+
+function addEmployeeRole(){
+    console.log("Add Role")
 }
 
 function updateEmployeeRole() {
@@ -213,7 +217,7 @@ function updateEmployeeRole() {
                         message: "What is the new role?",
                         choices: updateRole,
                     }
-                ).then(function(choice) {
+                ).then(function (choice) {
                     employeeChoiceID = employeeChoiceID.id;
                     let roleID = response.find(
                         (title) = title.title === choice.updateRole
