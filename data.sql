@@ -1,15 +1,16 @@
 DROP DATABASE IF EXISTS employeetrackerdb;
 CREATE DATABASE employeetrackerdb;
 USE employeetrackerdb;
+
 CREATE TABLE department(
   id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NULL,
+  name VARCHAR(30) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE role(
   id INT NOT NULL AUTO_INCREMENT,
-  title VARCHAR(30) NULL,
+  title VARCHAR(30) NOT NULL,
   salary INTEGER,
   department_id INTEGER NOT NULL,
   FOREIGN KEY(department_id) REFERENCES department(id),
@@ -18,12 +19,10 @@ CREATE TABLE role(
 
 CREATE TABLE employee(
   id INT NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(30) NULL,
-  last_name VARCHAR(30) NULL,
-  role_id INTEGER NOT NULL,
-  FOREIGN KEY(role_id) REFERENCES department(id),
-  manager_id INTEGER NOT NULL,
-  FOREIGN KEY(manager_id) REFERENCES employee(id),
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30) NOT NULL,
+  role_id INTEGER,
+  manager_id INTEGER NULL,
   PRIMARY KEY (id)
 );
 
@@ -36,17 +35,12 @@ VALUES ("Reception", 40000, 1), ("Manager", 60000, 1), ("Administrator", 50000, 
 ("Targeting", 40000, 3), ("Operator", 50000, 3), ("Stategist", 60000, 3),
 ("Communications Officer", 40000, 4), ("Communication Security", 50000, 4), ("ComSec Custodian", 60000, 4);
 
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Paul", "Mills", 1, 0), ("John", "Doe", 2 , 0), ("James", "Bond", 3, 0);
+
 SELECT * FROM department;
 
 SELECT * FROM role;
 
 SELECT * FROM employee;
---exampleguidetoreview, needtoadjustforuse
-SELECT top_albums.year, top_albums.album, top_albums.position, top5000.song, top5000.artist 
-FROM top_albums 
-INNER JOIN top5000 
-ON (top_albums.artist = top5000.artist AND top_albums.year = top5000.year) 
-WHERE (top_albums.artist = ? AND top5000.artist = ?) 
-ORDER BY top_albums.year, top_albums.position;
-
 
