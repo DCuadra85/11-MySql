@@ -89,13 +89,29 @@ function viewEmployeeAll() {
 
 function viewEmployeeDepartment() {
     console.log("View Employee Dept.")
-    // const viewEmployeeDepartment = function() {
-    //     const departmentArr = [];
-    connection.query("Select name From Department", function (err, res) {
+    const departmentArr = [];
+    connection.query("SELECT name FROM department", function (err, res) {
         if (err) throw err;
-        res.forEach(function (list) {
+        res.forEach(function (element) {
+            departmentArr.push(element.name);
+        });
 
-        })
+        inquirer.prompt(
+            {
+                name: "department",
+                type: "list",
+                message: "Which department do you want to view?",
+                choices: departmentArr,
+            }
+        ).then(function(answer) {
+            let selectDept = "SELECT first_name, last_name FROM employee INNER JOIN role ON (employee.role_id = role.id) INNER JOIN department ON (role.department_id = department.id) WHERE (department.name = ? AND employee.role_id = role.id AND role.department_id = department.id)";
+
+            connection.query(selectDept, [answer.department], function(err, res) {
+                if (err) throw err;
+                console.table(res);
+                start();
+            });
+        });
     })
 }
 
@@ -106,21 +122,40 @@ function viewEmployeeManager() {
 
 function addEmployee() {
     // inquirer
-    //     .prompt([{
-    //         name: "newemployee",
-    //         type: "input",
-    //         message: "What is the name of the employee?",
-    //         when: 
-    //             not a manager, then select manager from choice prompt
-    //     },
-    //     {
-    //     }]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
+    //     .prompt([
+    //         {
+    //             name: "firstName",
+    //             type: "input",
+    //             message: "What is the first name of the employee?",
+    //         },
+    //         {
+    //             name: "lastName",
+    //             type: "input",
+    //             message: "What is the last name of the employee?",
+    //         },
+    //         {
+    //             name: "selectRole"
+    //             type: "list",
+    //             message: "What is the employee role?",
+    //             choices: //[make an array]
+    //         },
+    //         {
+    //             name: "managerSelect",
+    //             type: "list",
+    //             message: "Who is the employee's manager?"
+    //             // choices: "Array"
+    //         },
+    //         // when: 
+    //         //     not a manager, then select manager from choice prompt
 
-    connection.query("Select name From Department", function (err, res) {
-        if (err) throw err;
 
-    })
-    console.log("add employee")
+    //     ]).then connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, role, manager)", const NAMEARRAY = (first_name, last_name))
+
+    //         connection.query("Select name From Department", function (err, res) {
+    //             if (err) throw err;
+
+    //         })
+    // console.log("add employee")
 }
 
 function removeEmployee() {
@@ -137,7 +172,7 @@ function updateEmployeeManager() {
 
 function viewRoles() {
     console.log("View Roles")
-    connection.query("SELECT * FROM role", function(err, res) {
+    connection.query("SELECT * FROM role", function (err, res) {
         if (err) throw err;
         console.table(res);
         start();
