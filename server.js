@@ -32,7 +32,7 @@ function start() {
             choices: [
                 "View All Employees",
                 "View All Employees by Department",
-                "View All Employes by Manager",
+                "View All Employees by Role",
                 "Add Employee",
                 "Remove Employee",
                 "Update Employee Role",
@@ -119,7 +119,11 @@ function viewEmployeeDepartment() {
 
 
 function viewEmployeeRole() {
-
+    connection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err;
+        console.table(res)
+    })
+    start();
     console.log("View Employee Role")
 }
 
